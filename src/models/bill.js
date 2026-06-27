@@ -9,7 +9,7 @@ const BillSchema = new mongoose.Schema({
   currentReading: { type: Number, required: true },
   unitsConsumed: { type: Number, required: true },
   fixedCharges: { type: Number, required: true },
-  energyCharges: { type: Number, required: true },
+  gasCharges: { type: Number, required: true },
   taxAmount: { type: Number, required: true },
   totalPayable: { type: Number, required: true },
   isPaid: { type: Boolean, default: false },

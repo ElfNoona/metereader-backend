@@ -20,11 +20,11 @@ const calculateTariff = (previousReading, currentReading, billingCycleStart, bil
   // 2. Fixed Charges Calculation
   const fixedCharges = billingDays * FIXED_CHARGE_PER_DAY;
   
-  // 3. Energy Charges Calculation
-  const energyCharges = unitsConsumed * RATE_PER_SCM;
+  // 3. Gas Charges Calculation
+  const gasCharges = unitsConsumed * RATE_PER_SCM;
   
   // 4. Tax Calculation
-  const subtotal = fixedCharges + energyCharges;
+  const subtotal = fixedCharges + gasCharges;
   const taxAmount = subtotal * TAX_RATE;
   
   // 5. Total Payable (Rounded to nearest 2 decimals)
@@ -33,7 +33,7 @@ const calculateTariff = (previousReading, currentReading, billingCycleStart, bil
   return {
     unitsConsumed,
     fixedCharges: Number(fixedCharges.toFixed(2)),
-    energyCharges: Number(energyCharges.toFixed(2)),
+    gasCharges: Number(gasCharges.toFixed(2)),
     taxAmount: Number(taxAmount.toFixed(2)),
     totalPayable: Number(totalPayable.toFixed(2)) 
   };

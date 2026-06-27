@@ -51,7 +51,7 @@ const generateInvoicePDF = (bill, user, outputPath) => {
     doc.fillColor(DARK_CHARCOAL).font('Helvetica-Bold').fontSize(12).text('BILL TO:', 50, 150);
     doc.font('Helvetica').fontSize(10)
        .text(`Name: ${user.fullName}`, 50, 170)
-       .text(`BP Number: ${user.accountNo}`, 50, 185) // IGL uses Business Partner (BP) Number
+       .text(`BP Number: ${user.bpNumber}`, 50, 185)
        .text(`Address: ${user.address}`, 50, 200);
 
     // Metadata Right
@@ -81,12 +81,12 @@ const generateInvoicePDF = (bill, user, outputPath) => {
        .text('Applicable Fixed Daily Charges', 250, row1Top + 10)
        .text(`Rs. ${bill.fixedCharges.toFixed(2)}`, 450, row1Top + 10, { align: 'right' });
 
-    // Table Row 2: Energy charges (PNG Consumption)
+    // Table Row 2: Gas charges (PNG Consumption)
     const row2Top = row1Top + 30;
     doc.rect(50, row2Top, 495, 30).fill('#FFFFFF');
     doc.text('PNG Consumption Charges', 70, row2Top + 10)
        .text(`${bill.unitsConsumed} SCM @ Rs. 49.59/SCM`, 250, row2Top + 10)
-       .text(`Rs. ${bill.energyCharges.toFixed(2)}`, 450, row2Top + 10, { align: 'right' });
+       .text(`Rs. ${bill.gasCharges.toFixed(2)}`, 450, row2Top + 10, { align: 'right' });
 
     // Table Row 3: Duty tax
     const row3Top = row2Top + 30;

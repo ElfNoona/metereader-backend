@@ -5,9 +5,8 @@ const UserSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true, trim: true, index: true },
   passwordHash: { type: String, required: true },
   fullName: { type: String, required: true },
-  accountNo: { type: String, required: true, unique: true },
+  bpNumber: { type: String, required: true, unique: true },
   address: { type: String, required: true },
-  sanctionedLoadKw: { type: Number, default: 2 }, // Needed to determine fixed bill charges
   createdAt: { type: Date, default: Date.now }
 });
 
