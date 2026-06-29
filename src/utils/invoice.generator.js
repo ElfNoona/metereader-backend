@@ -3,17 +3,16 @@ const fs = require('fs');
 const path = require('path');
 
 /**
- * Creates and outputs a vector PDF invoice
+ * Streams a vector PDF invoice directly to a writable stream (e.g. Express Response)
  * @param {Object} bill - Active mongoose bill structure
  * @param {Object} user - Target user profile details
- * @param {string} outputPath - Save file destination path
+ * @param {Object} resStream - Express response object or writable stream
  */
-const generateInvoicePDF = (bill, user, outputPath) => {
+const generateInvoicePDF = (bill, user, resStream) => {
   return new Promise((resolve, reject) => {
     const doc = new PDFDocument({ size: 'A4', margin: 50 });
-    const writeStream = fs.createWriteStream(outputPath);
 
-    doc.pipe(writeStream);
+    doc.pipe(resStream);
 
     // Color Constants (Styled for IGL)
     const PRIMARY_BLUE = '#00529B'; // IGL Blue
@@ -112,8 +111,8 @@ const generateInvoicePDF = (bill, user, outputPath) => {
 
     doc.end();
 
-    writeStream.on('finish', () => resolve(outputPath));
-    writeStream.on('error', (err) => reject(err));
+    resStream.on('finish', () => resolve());
+    resStream.on('error', (err) => reject(err));
   });
 };
 
